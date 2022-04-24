@@ -29,6 +29,12 @@
                 <option value="annually" class="option" >annually</option>
                 <option value="biennially" class="option" >biennially</option>
                 <option value="triennially" class="option" >triennially</option>
+                <option value="msetupfee" class="option" >msetupfee</option>
+                <option value="qsetupfee" class="option" >qsetupfee</option>
+                <option value="ssetupfee" class="option" >ssetupfee</option>
+                <option value="asetupfee" class="option" >asetupfee</option>
+                <option value="bsetupfee" class="option" >bsetupfee</option>
+                <option value="tsetupfee" class="option" >tsetupfee</option>
             </select>
         </div>
 
@@ -38,7 +44,7 @@
                 <?php
                 $data->each(function ($item){
                     echo "
-                      <option value=\"$item->id_tblproducts\" class=\"option\" >$item->id_tblpricing .$item->name .$item->name_tblproductgroups </option>
+                      <option value=\"$item->id_tblpricing\" class=\"option\" >$item->id_tblpricing .$item->name_tblcurrencies .$item->name .$item->name_tblproductgroups </option>
                     ";
                 });
                 ?>
@@ -99,6 +105,7 @@
             <th>quarterly</th>
             <th>semiannually</th>
             <th>annually</th>
+            <th>biennially</th>
             <th>triennially</th>
         </tr>
         </thead>

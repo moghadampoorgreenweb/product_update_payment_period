@@ -27,7 +27,6 @@ class ModuleController
     public function single()
     {
         $request = $this->getData();
-        d($request);
 
         if (is_null($request['product']) && empty($request['product'])) {
             return false;
@@ -40,7 +39,6 @@ class ModuleController
 
     public function group()
     {
-
         $request = $this->getData();
         if (is_null($request['amount']) & empty($request['amount']))
             if (is_null($request['cycle']) & empty($request['cycle']) | is_null($request['group']) & empty($request['group'])) {
@@ -64,8 +62,8 @@ class ModuleController
     public function update()
     {
         $request = $this->getData();
-
         $data = collect($request['product'])->map(function ($item) {
+
             return $this->model->whereAllNotCurrency('id_tblpricing', $item);
         });
         collect($request['cycle'])->map(function ($cycle) use ($request, $data) {
@@ -118,13 +116,12 @@ class ModuleController
         $data = collect($request['currency'])->map(function ($currency) use ($request) {
             return collect($request['group'])->map(function ($group) use ($request, $currency) {
                 return $this->model->whereAll('id_tblproductgroups', $group, $currency);
-//                dd($data);
             });
         });
         collect($request['cycle'])->map(function ($cycle) use ($request, $data) {
             $data->map(function ($groups) use ($request, $cycle) {
-                $groups->map(function ($group) use ($cycle,$request){
-                    $group->map(function ($item) use ($cycle,$request){
+                $groups->map(function ($group) use ($cycle, $request) {
+                    $group->map(function ($item) use ($cycle, $request) {
                         $this->model->updateCycleGroup($item->id_tblpricing, [
                             $cycle => $this->operation($request['amount'],
                                 $item->$cycle,

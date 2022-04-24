@@ -44,7 +44,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
                 'tblproducts.id as id_tblproducts',
                 'tblpricing.id as id_tblpricing',
                 'tblpricing.id as id_tblpricing')
-            ->get())->where($key, $where)->where('currency', $currency);
+            ->get())->where($key, $where)->where('currency', $currency)->where('type_tblpricing', 'product');
     }
 
     public function whereAllNotCurrency($key, $where)
@@ -62,8 +62,8 @@ class Model extends \Illuminate\Database\Eloquent\Model
                 'tblproducts.type as type_tblproducts',
                 'tblpricing.type as type_tblpricing',
                 'tblproducts.id as id_tblproducts',
-                'tblpricing.id as id_tblpricing',
-                'tblpricing.id as id_tblpricing')
+                'tblpricing.id as id_tblpricing'
+                )
             ->get())->where($key, $where)->first();
     }
 
@@ -112,7 +112,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
                 ->where('type', 'product')
                 ->update($out);
             echo "<br>" . "ID:" . $out['id'];
-            print_r(json_encode($data));
+            print_r(json_encode($out));
         } catch (\Exception $e) {
             file_put_contents(__DIR__ . '/txt.txt', json_encode($e));
         }
